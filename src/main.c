@@ -6,7 +6,7 @@
 /*   By: obamzuro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 01:06:30 by obamzuro          #+#    #+#             */
-/*   Updated: 2018/05/01 18:30:07 by obamzuro         ###   ########.fr       */
+/*   Updated: 2018/05/01 19:52:25 by obamzuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,11 +116,11 @@ void		print_acl(t_stat_name *file)
 	acl_entry_t entry;
 
 	if ((listxattr(file->pathname, 0, 0, XATTR_NOFOLLOW)) > 0)
-		ft_printf("@");
+		g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, "@");
 	else if (acl_get_link_np(file->pathname, ACL_TYPE_EXTENDED))
-		ft_printf("+");
+		g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, "+");
 	else
-		ft_printf(" ");
+		g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, " ");
 }
 
 void		print_chmod(t_stat_name *file)
@@ -139,14 +139,14 @@ void		print_chmod(t_stat_name *file)
 		if (mode & temp)
 		{
 			if (!(i % 3))
-				ft_printf("x");
+				g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, "x");
 			else if ((i % 3) == 1)
-				ft_printf("w");
+				g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, "w");
 			else if ((i % 3) == 2)
-				ft_printf("r");
+				g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, "r");
 		}
 		else
-			ft_printf("-");
+			g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, "-");
 		--i;
 	}
 }
@@ -156,19 +156,19 @@ int			ret_chmod_isdir(t_stat_name *file)
 	int mode;
 
 	if (S_ISLNK(file->stat.st_mode))
-		ft_printf("l");
+		g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, "l");
 	else if (S_ISDIR(file->stat.st_mode))
-		ft_printf("d");
+		g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, "d");
 	else if (S_ISCHR(file->stat.st_mode))
-		ft_printf("c");
+		g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, "c");
 	else if (S_ISBLK(file->stat.st_mode))
-		ft_printf("b");
+		g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, "b");
 	else if (S_ISSOCK(file->stat.st_mode))
-		ft_printf("s");
+		g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, "s");
 	else if (S_ISFIFO(file->stat.st_mode))
-		ft_printf("p");
+		g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, "p");
 	else
-		ft_printf("-");
+		g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, "-");
 	mode = 0;
 	print_chmod(file);
 	print_acl(file);
@@ -189,11 +189,11 @@ void		print_date(t_stat_name *file)
 	{
 		timefilestr[11] = 0;
 		timefilestr[24] = 0;
-		ft_printf("%s %s %s", timefilestr + 4, timefilestr + 20, file->name);
+		g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, "%s %s %s", timefilestr + 4, timefilestr + 20, file->name);
 		return ;
 	}
 	timefilestr[16] = 0;
-	ft_printf("%s %s", timefilestr + 4, file->name);
+	g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, "%s %s", timefilestr + 4, file->name);
 }
 
 void		print_link(t_stat_name *file)
@@ -204,12 +204,12 @@ void		print_link(t_stat_name *file)
 
 	if (!S_ISLNK(file->stat.st_mode))
 	{
-		ft_printf("\n");
+		g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, "\n");
 		return ;
 	}
 	lim = 2;
 	pathfile = malloc(sizeof(char) * lim);
-	ft_printf(" -> ");
+	g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, " -> ");
 	while ((ret = readlink(file->pathname, pathfile, lim - 1)) == lim - 1)
 	{
 		free(pathfile);
@@ -217,9 +217,9 @@ void		print_link(t_stat_name *file)
 		pathfile = malloc(sizeof(char) * lim);
 	}
 	pathfile[ret] = 0;
-	ft_printf(pathfile);
+	g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, pathfile);
 	free(pathfile);
-	ft_printf("\n");
+	g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, "\n");
 }
 
 void		print_minmaj(t_stat_name *file)
@@ -230,9 +230,9 @@ void		print_minmaj(t_stat_name *file)
 	minor = MINOR(file->stat.st_rdev);
 	major = MAJOR(file->stat.st_rdev);
 	if (minor > 255 || minor < 0)
-		ft_printf(" %3d, 0x%08x ", major, minor);
+		g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, " %3d, 0x%08x ", major, minor);
 	else
-		ft_printf(" %3d, %3d ", major, minor);
+		g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, " %3d, %3d ", major, minor);
 }
 
 void		print_stats(t_stat_name **files, size_t amfiles)
@@ -249,13 +249,13 @@ void		print_stats(t_stat_name **files, size_t amfiles)
 		mode = ret_chmod_isdir(files[i]);
 		if (S_ISCHR(files[i]->stat.st_mode) || S_ISBLK(files[i]->stat.st_mode))
 		{
-			ft_printf("  %*d %-*s  %-*s ", g_max_length.links, files[i]->stat.st_nlink, 
+			g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, " %*d %-*s  %-*s ", g_max_length.links, files[i]->stat.st_nlink, 
 				g_max_length.login, getpwuid(files[i]->stat.st_uid)->pw_name, 
 				g_max_length.group, getgrgid(files[i]->stat.st_gid)->gr_name);
 			print_minmaj(files[i]);
 		}
 		else
-			ft_printf("  %*d %-*s  %-*s  %*d ", g_max_length.links, files[i]->stat.st_nlink,
+			g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, " %*d %-*s  %-*s  %*d ", g_max_length.links, files[i]->stat.st_nlink,
 				g_max_length.login, getpwuid(files[i]->stat.st_uid)->pw_name,
 				g_max_length.group, getgrgid(files[i]->stat.st_gid)->gr_name,
 				g_max_length.size, files[i]->stat.st_size); print_date(files[i]);
@@ -283,7 +283,7 @@ char		check_access(const char *path, char isrecursion)
 {
 	if (access(path, R_OK) == -1)
 	{
-		ft_printf("./ls: %s: %s\n", path, strerror(errno));
+		g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, "./ls: %s: %s\n", path, strerror(errno));
 		return (0);
 	}
 	if (access(path, X_OK) == -1)
@@ -300,7 +300,7 @@ char		check_dir(const char *path)
 	dir = opendir(path);
 	if (!dir)
 	{
-		ft_printf("./ls: %s: %s\n", path, strerror(errno));
+		g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, "./ls: %s: %s\n", path, strerror(errno));
 		return (0);
 	}
 	closedir(dir);
@@ -315,7 +315,7 @@ void		print_dir(const char *path, char isrecursion)
 	size_t			total;
 
 	if (isrecursion)
-		ft_printf("\n%s:\n", path);
+		g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, "\n%s:\n", path);
 	if (!check_dir(path) || !check_access(path, isrecursion))
 		return ;
 	total = 0;
@@ -324,7 +324,7 @@ void		print_dir(const char *path, char isrecursion)
 	files = (t_stat_name **)malloc(sizeof(t_stat_name *) * amfiles);
 	fill_stats(files, path, &total);
 	sort_stats(files, amfiles);
-	ft_printf("total %zu\n", total);
+	g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, "total %zu\n", total);
 	print_stats(files, amfiles);
 	i = 0;
 	while (i < amfiles)
@@ -340,7 +340,10 @@ int			main(int argc, char **argv)
 {
 	t_params_corr	params[AM_PARAMS];
 
+	g_buff.line = malloc(PRINTF_BUFF_SIZE);
+	g_buff.cur = 0;
 	fill_params(params);
 	print_dir(argv[1], 0);
+	write(1, g_buff.line, g_buff.cur);
 //	system("leaks ls");
 }

@@ -6,11 +6,22 @@
 /*   By: obamzuro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 15:51:20 by obamzuro          #+#    #+#             */
-/*   Updated: 2018/05/01 18:36:46 by obamzuro         ###   ########.fr       */
+/*   Updated: 2018/05/01 19:33:11 by obamzuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+static size_t	read_width(const char **src, va_list *ap)
+{
+	if (**src == '*')
+	{
+		++(*src);
+		return (va_arg(*ap, int));
+	}
+	else
+		return (ft_positive_atoi(src));
+}
 
 static void		fix_conversion(t_special *spec)
 {
@@ -24,8 +35,8 @@ static void	print_special(const char **src, va_list *ap)
 	t_special	special;
 
 	read_flags(src);
-	special.width = ft_positive_atoi(src);
-	special.precision = read_precision(src);
+	special.width = read_width(src, ap);
+	special.precision = read_precision(src, ap);
 	special.size = read_size(src);
 	special.conversion = read_conversion(src);
 	fix_conversion(&special);

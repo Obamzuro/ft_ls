@@ -6,7 +6,7 @@
 /*   By: obamzuro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 20:45:32 by obamzuro          #+#    #+#             */
-/*   Updated: 2018/05/01 19:07:13 by obamzuro         ###   ########.fr       */
+/*   Updated: 2018/05/01 19:38:00 by obamzuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,23 +55,17 @@ typedef struct	s_stat_name
 	char		isdir;
 }				t_stat_name;
 
-//typedef struct	s_dirs
-//{
-//	char			*name;
-//	struct s_dirs	*next;
-//}				t_dirs;
-
 typedef struct	s_max_length
 {
 	int	links;
 	int	login;
 	int	group;
 	int	size;
-	/* FIXME DATE */
 }				t_max_length;
 
-t_max_length	g_max_length;
 extern int		errno;
+t_max_length	g_max_length;
+t_buffer		g_buff;
 
 void	quicksort_name(t_stat_name **arr, int bot, int top);
 char	*ls_strjoin_path(const char *s1, const char *s2);

@@ -6,7 +6,7 @@
 /*   By: obamzuro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 12:38:51 by obamzuro          #+#    #+#             */
-/*   Updated: 2018/05/01 13:25:41 by obamzuro         ###   ########.fr       */
+/*   Updated: 2018/05/01 19:22:31 by obamzuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void			reset_flags(void);
 
 void			read_flags(const char **src);
 size_t			ft_positive_atoi(const char **src);
-ssize_t			read_precision(const char **src);
+ssize_t			read_precision(const char **src, va_list *ap);
 t_size_corr*	read_size(const char **src);
 t_conv_corr*	read_conversion(const char **src);
 

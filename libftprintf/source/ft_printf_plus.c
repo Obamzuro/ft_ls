@@ -6,7 +6,7 @@
 /*   By: obamzuro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 09:40:43 by obamzuro          #+#    #+#             */
-/*   Updated: 2018/04/30 22:22:07 by obamzuro         ###   ########.fr       */
+/*   Updated: 2018/05/01 19:49:11 by obamzuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,16 @@ void		read_flags(const char **src)
 	}
 }
 
-ssize_t		read_precision(const char **src)
+ssize_t		read_precision(const char **src, va_list *ap)
 {
 	if (**src == '.')
 	{
 		++(*src);
+		if (**src == '*')
+		{
+			++(*src);
+			return (va_arg(*ap, unsigned int));
+		}
 		return (ft_positive_atoi(src));
 	}
 	else
