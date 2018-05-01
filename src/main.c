@@ -6,7 +6,7 @@
 /*   By: obamzuro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 01:06:30 by obamzuro          #+#    #+#             */
-/*   Updated: 2018/05/01 19:52:25 by obamzuro         ###   ########.fr       */
+/*   Updated: 2018/05/01 23:06:31 by obamzuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,10 +117,34 @@ void		print_acl(t_stat_name *file)
 
 	if ((listxattr(file->pathname, 0, 0, XATTR_NOFOLLOW)) > 0)
 		g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, "@");
-	else if (acl_get_link_np(file->pathname, ACL_TYPE_EXTENDED))
+	else if ((acl = acl_get_link_np(file->pathname, ACL_TYPE_EXTENDED)))
+	{
 		g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, "+");
+		free(acl);
+	}
 	else
 		g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, " ");
+}
+
+void		print_chmod_exec(t_stat_name *file, int order, size_t bit)
+{
+	mode_t	mode;
+
+	mode = file->stat.st_mode;
+	if (order == 2 || order == 1)
+	{
+		if (mode & bit)
+			mode & (0x200 << order) ? ft_snprintf(g_buff.line, g_buff.cur, "s") : ft_snprintf(g_buff.line, g_buff.cur, "x");
+		else
+			mode & (0x200 << order) ? ft_snprintf(g_buff.line, g_buff.cur, "S") : ft_snprintf(g_buff.line, g_buff.cur, "-");
+	}
+	else
+	{
+		if (mode & bit)
+			mode & 0x200 ? ft_snprintf(g_buff.line, g_buff.cur, "t") : ft_snprintf(g_buff.line, g_buff.cur, "x");
+		else
+			mode & 0x200 ? ft_snprintf(g_buff.line, g_buff.cur, "T") : ft_snprintf(g_buff.line, g_buff.cur, "-");
+	}
 }
 
 void		print_chmod(t_stat_name *file)
@@ -136,11 +160,11 @@ void		print_chmod(t_stat_name *file)
 	{
 		temp = 1;
 		temp <<= i;
-		if (mode & temp)
+		if (!(i % 3))
+			print_chmod_exec(file, i / 3, temp);
+		else if (mode & temp)
 		{
-			if (!(i % 3))
-				g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, "x");
-			else if ((i % 3) == 1)
+			if ((i % 3) == 1)
 				g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, "w");
 			else if ((i % 3) == 2)
 				g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, "r");
@@ -345,5 +369,6 @@ int			main(int argc, char **argv)
 	fill_params(params);
 	print_dir(argv[1], 0);
 	write(1, g_buff.line, g_buff.cur);
+	free(g_buff.line);
 //	system("leaks ls");
 }

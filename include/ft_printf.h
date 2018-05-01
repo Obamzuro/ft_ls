@@ -6,13 +6,13 @@
 /*   By: obamzuro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 12:38:51 by obamzuro          #+#    #+#             */
-/*   Updated: 2018/05/01 19:36:10 by obamzuro         ###   ########.fr       */
+/*   Updated: 2018/05/01 20:43:36 by obamzuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
-# define PRINTF_BUFF_SIZE 4096
+# define PRINTF_BUFF_SIZE 4396
 # define AM_FLAGS 5
 # define AM_SIZES 6
 # define AM_CONVS 15
