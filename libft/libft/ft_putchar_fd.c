@@ -6,7 +6,7 @@
 /*   By: obamzuro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 01:10:52 by obamzuro          #+#    #+#             */
-/*   Updated: 2018/04/15 05:18:15 by obamzuro         ###   ########.fr       */
+/*   Updated: 2018/03/26 22:32:11 by obamzuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	print_for_four(int c, int fd)
 	write(fd, &b, 1);
 }
 
-int			ft_putchar_fd(wchar_t c, int fd)
+void		ft_putchar_fd(int c, int fd)
 {
 	char	b;
 
@@ -68,9 +68,8 @@ int			ft_putchar_fd(wchar_t c, int fd)
 		write(fd, &c, 1);
 	else if (b == 2)
 		print_for_two(c, fd);
-	else if (b == 3)
+	else if (b == 2)
 		print_for_three(c, fd);
-	else if (b == 4)
+	else if (b == 3)
 		print_for_four(c, fd);
-	return (b);
 }

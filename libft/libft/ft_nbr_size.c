@@ -1,18 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_nbr_size.c                                      :+:      :+:    :+:   */
+/*   pf_nbr_size.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obamzuro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/12 01:15:38 by obamzuro          #+#    #+#             */
-/*   Updated: 2018/04/15 06:05:46 by obamzuro         ###   ########.fr       */
+/*   Created: 2018/05/01 13:26:34 by obamzuro          #+#    #+#             */
+/*   Updated: 2018/05/01 13:42:20 by obamzuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_nbr_size(intmax_t n, char base, char alternative)
+size_t	ft_nbr_size(intmax_t n)
+{
+	size_t i;
+
+	i = 1;
+	while (n / 10)
+	{
+		++i;
+		n /= 10;
+	}
+	return (i);
+}
+
+size_t	ft_nbr_basesize(intmax_t n, char base, char alternative)
 {
 	size_t i;
 
@@ -32,7 +45,7 @@ size_t	ft_nbr_size(intmax_t n, char base, char alternative)
 	return (i);
 }
 
-size_t	ft_unbr_size(uintmax_t n, char base, char alternative)
+size_t	ft_unbr_basesize(uintmax_t n, char base, char alternative)
 {
 	size_t i;
 

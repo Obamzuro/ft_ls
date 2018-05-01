@@ -6,27 +6,41 @@
 #    By: obamzuro <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/18 00:20:32 by obamzuro          #+#    #+#              #
-#    Updated: 2018/04/25 21:12:34 by obamzuro         ###   ########.fr        #
+#    Updated: 2018/05/01 19:07:51 by obamzuro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ls
 
-SRC = main.c\
-	  sort.c
+SRCNAME = 	main.c			\
+			ls_strjoin.c		\
+			ls_sort.c			\
+
+SRC = $(addprefix src/, $(SRCNAME))
+
+OBJ = $(SRC:.c=.o)
+
+FLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
 $(NAME): $(SRC)
-	gcc $(SRC) -I libft/libft -L libft -lftprintf -o $(NAME)
+	make -C libftprintf
+	make -C libft
+	gcc $(SRC) -I include -L libft -lft -L libftprintf -lftprintf -o $(NAME)
+	gcc $(SRC) -g -I include -L libft -lft -L libftprintf -lftprintf -o d
 
-d: $(SRC)
-	gcc -g $(SRC) -I libft/libft -L libft -lftprintf -o d
+%.o: %.c
+	gcc -c $< -o $@
 
 clean:
-	rm -rf main.o
+	make -C libftprintf clean
+	make -C libft clean
+	find . -name ".*.sw[pon" -o -name "*.o" -exec rm -f {} \;
 
-fclean:
+fclean: clean
+	make -C libftprintf fclean
+	make -C libft fclean
 	rm $(NAME)
 
-re: fclean all d
+re: fclean all

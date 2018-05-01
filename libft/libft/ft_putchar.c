@@ -6,13 +6,13 @@
 /*   By: obamzuro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/25 00:58:05 by obamzuro          #+#    #+#             */
-/*   Updated: 2018/04/15 05:20:26 by obamzuro         ###   ########.fr       */
+/*   Updated: 2018/03/26 22:31:13 by obamzuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_putchar(wchar_t c)
+void	ft_putchar(int c)
 {
-	return (ft_putchar_fd(c, 1));
+	ft_putchar_fd(c, 1);
 }
