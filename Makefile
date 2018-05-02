@@ -6,15 +6,17 @@
 #    By: obamzuro <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/18 00:20:32 by obamzuro          #+#    #+#              #
-#    Updated: 2018/05/01 19:07:51 by obamzuro         ###   ########.fr        #
+#    Updated: 2018/05/02 21:45:52 by obamzuro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ls
 
 SRCNAME = 	main.c			\
-			ls_strjoin.c		\
-			ls_sort.c			\
+			ls_strjoin.c	\
+			ls_sort.c		\
+			parser.c		\
+			printing.c		\
 
 SRC = $(addprefix src/, $(SRCNAME))
 

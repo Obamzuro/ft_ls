@@ -6,7 +6,7 @@
 /*   By: obamzuro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 20:45:32 by obamzuro          #+#    #+#             */
-/*   Updated: 2018/05/01 21:11:08 by obamzuro         ###   ########.fr       */
+/*   Updated: 2018/05/02 22:44:32 by obamzuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,7 @@
 # define AM_PARAMS 4
 # define PARAMS "rRal"
 
-typedef enum	e_params
-{
-	reverse,
-	recursive,
-	all,
-	longformat
-}				t_params;
-
-typedef struct	s_params_corr
-{
-//	t_params	name;
-	char		ascii;
-	char		exist;
-}				t_params_corr;
+char			g_params[256];
 
 typedef struct	s_stat_name
 {
@@ -66,8 +53,27 @@ typedef struct	s_max_length
 extern int		errno;
 t_max_length	g_max_length;
 t_buffer		g_buff;
+char			*g_nameapp;
 
 void	quicksort_name(t_stat_name **arr, int bot, int top);
+void	quicksort_argv(char **argv, int bot, int top);
 char	*ls_strjoin_path(const char *s1, const char *s2);
+
+int		fill_params(int argc, char **argv);
+void	print_files(int argc, char **argv, int position);
+//void	print_regfiles(int argc, char **argv, int position, t_stat_name **files);
+//void	print_dir(const char *path, char isrecursion);
+
+char	check_dir(const char *path);
+char	check_access(const char *path, char isrecursion);
+
+void	reset_max_length(void);
+
+size_t	count_files(const char *path);
+
+void	fill_stats(t_stat_name **files, const char *path, size_t *total);
+void	sort_stats(t_stat_name **files, size_t amfiles);
+void	print_stats(t_stat_name **files, size_t amfiles);
+void	free_stats(t_stat_name **files, size_t amfiles);
 
 #endif

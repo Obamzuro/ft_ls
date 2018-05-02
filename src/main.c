@@ -6,24 +6,11 @@
 /*   By: obamzuro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 01:06:30 by obamzuro          #+#    #+#             */
-/*   Updated: 2018/05/01 23:16:05 by obamzuro         ###   ########.fr       */
+/*   Updated: 2018/05/02 22:42:07 by obamzuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
-
-void		fill_params(t_params_corr *params)
-{
-	size_t	i;
-i = 0;
-	while (i < AM_PARAMS)
-	{
-//		params[i].name = i;
-		params[i].ascii = PARAMS[i];
-		params[i].exist = 0;
-		++i;
-	}
-}
 
 size_t		count_files(const char *path)
 {
@@ -331,43 +318,14 @@ char		check_dir(const char *path)
 	return (1);
 }
 
-void		print_dir(const char *path, char isrecursion)
-{
-	t_stat_name		**files;
-	size_t			amfiles;
-	size_t			i;
-	size_t			total;
-
-	if (isrecursion)
-		g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, "\n%s:\n", path);
-	if (!check_dir(path) || !check_access(path, isrecursion))
-		return ;
-	total = 0;
-	reset_max_length();
-	amfiles = count_files(path);
-	files = (t_stat_name **)malloc(sizeof(t_stat_name *) * amfiles);
-	fill_stats(files, path, &total);
-	sort_stats(files, amfiles);
-	g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, "total %zu\n", total);
-	print_stats(files, amfiles);
-	i = 0;
-	while (i < amfiles)
-	{
-		if (files[i]->isdir)
-			print_dir(files[i]->pathname, 1);
-		++i;
-	}
-	free_stats(files, amfiles);
-}
-
 int			main(int argc, char **argv)
 {
-	t_params_corr	params[AM_PARAMS];
+	//t_params_corr	params[AM_PARAMS];
 
 	g_buff.line = malloc(PRINTF_BUFF_SIZE);
 	g_buff.cur = 0;
-	fill_params(params);
-	print_dir(argv[1], 0);
+	g_nameapp = argv[0];
+	print_files(argc, argv, fill_params(argc, argv));
 	write(1, g_buff.line, g_buff.cur);
 	free(g_buff.line);
 //	system("leaks ls");
