@@ -6,7 +6,7 @@
 /*   By: obamzuro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 20:45:32 by obamzuro          #+#    #+#             */
-/*   Updated: 2018/05/02 22:44:32 by obamzuro         ###   ########.fr       */
+/*   Updated: 2018/05/03 19:28:19 by obamzuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct	s_stat_name
 	char		*name;
 	char		*pathname;
 	char		isdir;
+	char		printignore;
 }				t_stat_name;
 
 typedef struct	s_max_length
@@ -68,12 +69,13 @@ char	check_dir(const char *path);
 char	check_access(const char *path, char isrecursion);
 
 void	reset_max_length(void);
+void	fill_max_length(t_stat_name *file);
 
 size_t	count_files(const char *path);
 
 void	fill_stats(t_stat_name **files, const char *path, size_t *total);
 void	sort_stats(t_stat_name **files, size_t amfiles);
-void	print_stats(t_stat_name **files, size_t amfiles);
+char	print_stats(t_stat_name **files, size_t amfiles);
 void	free_stats(t_stat_name **files, size_t amfiles);
 
 #endif

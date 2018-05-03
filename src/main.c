@@ -6,7 +6,7 @@
 /*   By: obamzuro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 01:06:30 by obamzuro          #+#    #+#             */
-/*   Updated: 2018/05/02 22:42:07 by obamzuro         ###   ########.fr       */
+/*   Updated: 2018/05/03 22:48:08 by obamzuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ size_t		count_files(const char *path)
 	if (dir == NULL)
 		return (0);
 	while ((dp = readdir(dir)) != NULL)
-		++count;
+	{
+		if (!(!g_params['a'] && dp->d_name[0] == '.'))
+			++count;
+	}
 	closedir(dir);
 	return (count);
 }
@@ -49,9 +52,9 @@ void		fill_max_length(t_stat_name *file)
 	temp = ft_strlen(getgrgid(file->stat.st_gid)->gr_name);
 	if (temp > g_max_length.group)
 		g_max_length.group = temp;
-	if (file->stat.st_mode & S_IFBLK)
+	if (S_ISBLK(file->stat.st_mode) || S_ISCHR(file->stat.st_mode))
 	{
-		if (8 > g_max_length.size)
+		if (g_max_length.size < 8)
 			g_max_length.size = 8;
 	}
 	else
@@ -75,8 +78,11 @@ void		fill_stats(t_stat_name **files, const char *path, size_t *total)
 		return ;
 	while ((dp = readdir(dir)) != NULL)
 	{
+		if (!g_params['a'] && dp->d_name[0] == '.')
+			continue ;
 		files[count] = (t_stat_name *)malloc(sizeof(t_stat_name));
 		files[count]->isdir = 0;
+		files[count]->printignore = 0;
 		tempdir = ls_strjoin_path(path, dp->d_name);
 		files[count]->pathname = tempdir;
 		if (lstat(tempdir, &(files[count]->stat)) == -1)
@@ -246,33 +252,54 @@ void		print_minmaj(t_stat_name *file)
 		g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, " %3d, %3d ", major, minor);
 }
 
-void		print_stats(t_stat_name **files, size_t amfiles)
+void		easy_print_stats(t_stat_name **files, size_t amfiles, size_t i)
+{
+	g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, "%10s", files[i]->name);
+}
+
+char		print_stats(t_stat_name **files, size_t amfiles)
 {
 	size_t	i;
 	size_t	dircount;
 	int		mode;
 	char	*date;
+	char	isprinted;
 
 	i = 0;
 	dircount = 0;
+	isprinted = 0;
 	while (i < amfiles)
 	{
-		mode = ret_chmod_isdir(files[i]);
-		if (S_ISCHR(files[i]->stat.st_mode) || S_ISBLK(files[i]->stat.st_mode))
+		if (files[i]->printignore)
 		{
-			g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, " %*d %-*s  %-*s ", g_max_length.links, files[i]->stat.st_nlink, 
-				g_max_length.login, getpwuid(files[i]->stat.st_uid)->pw_name, 
-				g_max_length.group, getgrgid(files[i]->stat.st_gid)->gr_name);
-			print_minmaj(files[i]);
+			++i;
+			continue ;
+		}
+		isprinted = 1;
+		if (g_params['l'])
+		{
+			mode = ret_chmod_isdir(files[i]);
+			if (S_ISCHR(files[i]->stat.st_mode) || S_ISBLK(files[i]->stat.st_mode))
+			{
+				g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, " %*d %-*s  %-*s ", g_max_length.links, files[i]->stat.st_nlink, 
+					g_max_length.login, getpwuid(files[i]->stat.st_uid)->pw_name, 
+					g_max_length.group, getgrgid(files[i]->stat.st_gid)->gr_name);
+				print_minmaj(files[i]);
+			}
+			else
+				g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, " %*d %-*s  %-*s  %*d ", g_max_length.links, files[i]->stat.st_nlink,
+					g_max_length.login, getpwuid(files[i]->stat.st_uid)->pw_name,
+					g_max_length.group, getgrgid(files[i]->stat.st_gid)->gr_name,
+					g_max_length.size, files[i]->stat.st_size); print_date(files[i]);
+			print_link(files[i]);
 		}
 		else
-			g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, " %*d %-*s  %-*s  %*d ", g_max_length.links, files[i]->stat.st_nlink,
-				g_max_length.login, getpwuid(files[i]->stat.st_uid)->pw_name,
-				g_max_length.group, getgrgid(files[i]->stat.st_gid)->gr_name,
-				g_max_length.size, files[i]->stat.st_size); print_date(files[i]);
-		print_link(files[i]);
+			easy_print_stats(files, amfiles, i);
 		++i;
 	}
+	if (isprinted && !g_params['l'])
+		g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, "\n");
+	return (isprinted);
 }
 
 void		free_stats(t_stat_name **files, size_t amfiles)

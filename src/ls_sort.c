@@ -6,7 +6,7 @@
 /*   By: obamzuro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 22:39:53 by obamzuro          #+#    #+#             */
-/*   Updated: 2018/05/02 21:29:51 by obamzuro         ###   ########.fr       */
+/*   Updated: 2018/05/03 22:45:58 by obamzuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int		partition(t_stat_name **arr, int bot, int top)
 			++bot;
 			--top;
 		}
-		if (bot == top)
+		else if (bot == top)
 		{
 			++bot;
 			--top;
