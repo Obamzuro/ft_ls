@@ -6,7 +6,7 @@
 /*   By: obamzuro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 18:40:12 by obamzuro          #+#    #+#             */
-/*   Updated: 2018/05/02 22:45:40 by obamzuro         ###   ########.fr       */
+/*   Updated: 2018/05/04 21:21:58 by obamzuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,10 @@ int			fill_params(int argc, char **argv)
 	reset_params();
 	while (i < argc)
 	{
-		if (argv[i][0] != '-' || (argv[i][0] == '-' &&
-				argv[i][1] == '-' && argv[i][2] == 0))
+		if (argv[i][0] != '-')
 			return (i);
+		if (argv[i][0] == '-' && argv[i][1] == '-' && argv[i][2] == 0)
+			return (i + 1);
 		temp = argv[i] + 1;
 		while (*temp)
 		{

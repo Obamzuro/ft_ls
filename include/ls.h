@@ -6,7 +6,7 @@
 /*   By: obamzuro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 20:45:32 by obamzuro          #+#    #+#             */
-/*   Updated: 2018/05/03 19:28:19 by obamzuro         ###   ########.fr       */
+/*   Updated: 2018/05/04 21:26:13 by obamzuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,11 @@
 # include <pwd.h>
 # include <grp.h>
 # include <time.h>
+# include <math.h>
 # include <sys/types.h>
 # include <sys/acl.h>
 # include <sys/xattr.h>
+# include <sys/ioctl.h>
 # include "libft.h"
 # include "ft_printf.h"
 # define IS_CURPREV(str) ((str[0] == '.') && (!str[1] || (str[1] == '.' && !str[2])))
@@ -40,15 +42,15 @@ typedef struct	s_stat_name
 	char		*name;
 	char		*pathname;
 	char		isdir;
-	char		printignore;
 }				t_stat_name;
 
 typedef struct	s_max_length
 {
-	int	links;
-	int	login;
-	int	group;
-	int	size;
+	int		links;
+	int		login;
+	int		group;
+	int		size;
+	int		name;
 }				t_max_length;
 
 extern int		errno;
@@ -76,6 +78,7 @@ size_t	count_files(const char *path);
 void	fill_stats(t_stat_name **files, const char *path, size_t *total);
 void	sort_stats(t_stat_name **files, size_t amfiles);
 char	print_stats(t_stat_name **files, size_t amfiles);
+char	print_l_stats(t_stat_name **files, size_t amfiles);
 void	free_stats(t_stat_name **files, size_t amfiles);
 
 #endif
