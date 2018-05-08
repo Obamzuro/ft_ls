@@ -6,13 +6,13 @@
 /*   By: obamzuro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 12:38:51 by obamzuro          #+#    #+#             */
-/*   Updated: 2018/05/01 20:43:36 by obamzuro         ###   ########.fr       */
+/*   Updated: 2018/05/08 20:14:40 by obamzuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
-# define PRINTF_BUFF_SIZE 4396
+# define PRINTF_BUFF_SIZE 4096
 # define AM_FLAGS 5
 # define AM_SIZES 6
 # define AM_CONVS 15
@@ -102,6 +102,7 @@ t_size_corr		g_sizes[AM_SIZES];
 t_conv_corr		g_convs[AM_CONVS];
 t_flags_corr	g_flags[AM_FLAGS];
 t_buffer		g_buff;
+int				g_fd;
 
 void			fill_convs(void);
 void			fill_sizes(void);
@@ -110,7 +111,7 @@ void			reset_flags(void);
 
 void			read_flags(const char **src);
 size_t			ft_positive_atoi(const char **src);
-ssize_t			read_precision(const char **src);
+ssize_t			read_precision(const char **src, va_list *ap);
 t_size_corr*	read_size(const char **src);
 t_conv_corr*	read_conversion(const char **src);
 
@@ -128,5 +129,6 @@ void			pf_write(char src);
 void			pf_write_tail(void);
 
 int				ft_printf(const char *src, ...);
+int				ft_fprintf(int fd, const char *src, ...);
 size_t			ft_snprintf(char *line, size_t cur, const char *src, ...);
 #endif

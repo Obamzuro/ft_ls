@@ -6,74 +6,68 @@
 /*   By: obamzuro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 21:35:23 by obamzuro          #+#    #+#             */
-/*   Updated: 2018/05/04 21:24:22 by obamzuro         ###   ########.fr       */
+/*   Updated: 2018/05/08 16:34:36 by obamzuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-static size_t	print_errorfiles(int argc, char **argv, int position, t_stat_name ***files)
+static void		fill_argv_dirs_or_regfiles(t_stat_name *mystat,
+		t_counter *counter,
+		char *name, t_stat_name **files[2])
 {
-	size_t		i;
-	size_t		j;
+	if (S_ISDIR(mystat->stat.st_mode) && !g_params['d'])
+	{
+		files[1][counter->dir] = mystat;
+		files[1][counter->dir]->name = name;
+		files[1][counter->dir]->pathname = name;
+		++(counter->dir);
+	}
+	else
+	{
+		files[0][counter->file] = mystat;
+		files[0][counter->file]->name = name;
+		files[0][counter->file]->pathname = name;
+		fill_max_length(files[0][counter->file]);
+		++(counter->file);
+	}
+}
+
+static size_t	fill_argv_files(int argc, char **argv,
+		int position, t_stat_name **files[2])
+{
+	t_counter	counter;
 	int			ret;
 	t_stat_name	*mystat;
 
-	i = 0;
-	j = 0;
+	counter.dir = 0;
+	counter.file = 0;
 	while (position < argc)
 	{
-		mystat = (t_stat_name *)malloc(sizeof(t_stat_name));
+		EXITZERO(mystat = (t_stat_name *)malloc(sizeof(t_stat_name)));
 		ret = lstat(argv[position], &mystat->stat);
-		if (!g_params['l'] && S_ISLNK(mystat->stat.st_mode))
+		if (ret != -1 && !g_params['l'] && S_ISLNK(mystat->stat.st_mode))
 			ret = stat(argv[position], &mystat->stat);
 		if (ret == -1)
-			g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, "%s: %s: %s\n",
-					g_nameapp, argv[position], strerror(errno));
-		else if (S_ISDIR(mystat->stat.st_mode))
 		{
-			files[1][i] = mystat;
-			files[1][i]->name = argv[position];
-			files[1][i]->pathname = files[1][i]->name;
-			++i;
+//			g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur,
+//					"%s: %s: %s\n", g_nameapp, argv[position], strerror(errno));
+			write(1, g_buff.line, g_buff.cur);
+			fprintf(stderr, "%s: %s: %s\n", g_nameapp, argv[position], strerror(errno));
+			g_buff.cur = 0;
+			free(mystat);
 		}
 		else
-		{
-			files[0][j] = mystat;
-			files[0][j]->name = argv[position];
-			files[0][j]->pathname = files[0][j]->name;
-			fill_max_length(files[0][j]);
-			++j;
-		}
+			fill_argv_dirs_or_regfiles(mystat, &counter, argv[position], files);
 		++position;
 	}
-	return (j);
+	return (counter.file);
 }
 
-static void		print_dir(const char *path, char isrecursion)
+static void		print_dir_rec(t_stat_name **files, size_t amfiles)
 {
-	t_stat_name		**files;
-	size_t			amfiles;
-	size_t			i;
-	size_t			total;
+	int i;
 
-	if (isrecursion)
-		g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, "\n%s:\n", path);
-	if (!check_dir(path) || !check_access(path, isrecursion))
-		return ;
-	total = 0;
-	reset_max_length();
-	amfiles = count_files(path);
-	files = (t_stat_name **)malloc(sizeof(t_stat_name *) * amfiles);
-	fill_stats(files, path, &total);
-	sort_stats(files, amfiles);
-	if (g_params['l'])
-	{
-		g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, "total %zu\n", total);
-		print_l_stats(files, amfiles);
-	}
-	else
-		print_stats(files, amfiles);
 	if (g_params['R'])
 	{
 		i = 0;
@@ -84,10 +78,41 @@ static void		print_dir(const char *path, char isrecursion)
 			++i;
 		}
 	}
+}
+
+void			print_dir(const char *path, char isrecursion)
+{
+	t_stat_name		**files;
+	size_t			amfiles;
+	size_t			total;
+
+	if (isrecursion)
+		g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, "\n%s:\n", path);
+	if (!check_dir(path))
+		return ;
+	total = 0;
+	reset_max_length();
+	amfiles = count_files(path);
+	if (!amfiles)
+		return ;
+//	if ((amfiles = count_files(path)) > 0 && isrecursion)
+//		g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, "\n");
+	EXITZERO(files = (t_stat_name **)malloc(sizeof(t_stat_name *) * amfiles));
+	if (fill_stats(&files, path, &total) == -1)
+		return ;
+	sort_stats(files, amfiles);
+	if (g_params['l'] && amfiles)
+	{
+		g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, "total %zu\n", total);
+		print_l_stats(files, amfiles);
+	}
+	else
+		print_stats(files, amfiles);
+	print_dir_rec(files, amfiles);
 	free_stats(files, amfiles);
 }
 
-static void	free_files_stats(t_stat_name **files[2], int size)
+static void		free_files_stats(t_stat_name **files[2], int size)
 {
 	int i;
 
@@ -102,20 +127,15 @@ static void	free_files_stats(t_stat_name **files[2], int size)
 	free(files[1]);
 }
 
-void		print_files(int argc, char **argv, int position)
+void			fill_files_structs(t_stat_name **files[2],
+		int argc, int position)
 {
-	char			isneedprefix;
-	t_stat_name		**files[2];
-	int				i;
-	char			first;
-	size_t			regfiles;
+	int i;
 
-	quicksort_argv(argv, position, argc - 1);
-	isneedprefix = 0;
-	if (position < argc - 1)
-		isneedprefix = 1;
-	files[0] = (t_stat_name **)malloc(sizeof(t_stat_name *) * (argc - position));
-	files[1] = (t_stat_name **)malloc(sizeof(t_stat_name *) * (argc - position));
+	EXITZERO(files[0] = (t_stat_name **)malloc(sizeof(t_stat_name *)
+				* (argc - position)));
+	EXITZERO(files[1] = (t_stat_name **)malloc(sizeof(t_stat_name *)
+				* (argc - position)));
 	i = 0;
 	while (i < argc - position)
 	{
@@ -123,28 +143,67 @@ void		print_files(int argc, char **argv, int position)
 		files[1][i] = 0;
 		++i;
 	}
+}
+
+void			print_regfiles(t_stat_name **files[2], int argc,
+		char **argv, int position)
+{
+	size_t			amregfiles;
+
 	reset_max_length();
-	regfiles = print_errorfiles(argc, argv, position, files);
-	if (regfiles)
+	amregfiles = fill_argv_files(argc, argv, position, files);
+	if (amregfiles)
 	{
 		if (g_params['l'])
-			first = print_l_stats(files[0], regfiles);
+			print_l_stats(files[0], amregfiles);
 		else
-			first = print_stats(files[0], regfiles);
+			print_stats(files[0], amregfiles);
 	}
-	i = 0;
-	while (i < argc - position)
+}
+
+void			print_files(int argc, char **argv, int position)
+{
+	char			isneedprefix;
+	int				i;
+	char			first;
+	t_stat_name		**files[2];
+	int				flag;
+
+	if (!g_params['f'])
+		quicksort_argv(argv, position, argc - 1, g_params['r']);
+	else
+		g_params['a'] = 1;
+	flag = 0;
+	if (position == argc)
 	{
-		if (!files[1][i])
-			break ;
+		argv = (char **)malloc(sizeof(char *));
+		argv[0] = (char *)malloc(2);
+		argv[0][0] = '.';
+		argv[0][1] = 0;
+		argc = 1;
+		position = 0;
+		flag = 1;
+	}
+	fill_files_structs(files, argc, position);
+	print_regfiles(files, argc, argv, position);
+	isneedprefix = (position < argc - 1) ? 1 : 0;
+	first = files[0][0] ? 1 : 0;
+	i = -1;
+	while (++i < argc - position && files[1][i])
+	{
 		if (!first)
 			first = 1;
 		else
 			g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, "\n");
 		if (isneedprefix)
-			g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, "%s:\n", files[1][i]->name);
+			g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur,
+					"%s:\n", files[1][i]->name);
 		print_dir(files[1][i]->name, 0);
-		++i;
 	}
-//	free_files_stats(files, argc - position);
+	free_files_stats(files, argc - position);
+	if (flag)
+	{
+		free(argv[0]);
+		free(argv);
+	}
 }

@@ -6,11 +6,11 @@
 #    By: obamzuro <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/18 00:20:32 by obamzuro          #+#    #+#              #
-#    Updated: 2018/05/04 16:14:37 by obamzuro         ###   ########.fr        #
+#    Updated: 2018/05/07 19:25:28 by obamzuro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ls
+NAME = ft_ls
 
 SRCNAME = 	main.c			\
 			ls_strjoin.c	\

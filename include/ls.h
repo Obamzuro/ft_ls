@@ -6,7 +6,7 @@
 /*   By: obamzuro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 20:45:32 by obamzuro          #+#    #+#             */
-/*   Updated: 2018/05/04 21:26:13 by obamzuro         ###   ########.fr       */
+/*   Updated: 2018/05/08 16:17:02 by obamzuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,60 @@
 # include <grp.h>
 # include <time.h>
 # include <math.h>
+# include <wchar.h>
 # include <sys/types.h>
 # include <sys/acl.h>
 # include <sys/xattr.h>
 # include <sys/ioctl.h>
 # include "libft.h"
 # include "ft_printf.h"
+# define ANSI_COLOR_BLACK    "\x1b[30m"
+# define ANSI_COLOR_RED      "\x1b[31m"
+# define ANSI_COLOR_GREEN    "\x1b[32m"
+# define ANSI_COLOR_YELLOW   "\x1b[33m"
+# define ANSI_COLOR_BLUE     "\x1b[34m"
+# define ANSI_COLOR_MAGENTA  "\x1b[35m"
+# define ANSI_COLOR_CYAN     "\x1b[36m"
+# define ANSI_COLOR_WHITE    "\x1b[36m"
+
+# define ANSI_COLOR_BLACKN   "\e[30m"
+# define ANSI_COLOR_REDN     "\e[31m"
+# define ANSI_COLOR_GREENN   "\e[32m"
+# define ANSI_COLOR_YELLOWN  "\e[33m"
+# define ANSI_COLOR_BLUEN    "\e[34m"
+# define ANSI_COLOR_MAGENTAN "\e[35m"
+# define ANSI_COLOR_CYANN    "\e[36m"
+# define ANSI_COLOR_WHITEN   "\e[36m"
+
+# define ANSI_COLOR_BBLACK   "\x1b[40m"
+# define ANSI_COLOR_BRED     "\x1b[41m"
+# define ANSI_COLOR_BGREEN   "\x1b[42m"
+# define ANSI_COLOR_BYELLOW  "\x1b[43m"
+# define ANSI_COLOR_BBLUE    "\x1b[44m"
+# define ANSI_COLOR_BMAGENTA "\x1b[45m"
+# define ANSI_COLOR_BCYAN    "\x1b[46m"
+# define ANSI_COLOR_BWHITE   "\x1b[46m"
+# define ANSI_COLOR_RESET    "\x1b[0m"
+
+# define ANSI_COLOR_BBLACKN   "\e[40m"
+# define ANSI_COLOR_BREDN     "\e[41m"
+# define ANSI_COLOR_BGREENN   "\e[42m"
+# define ANSI_COLOR_BYELLOWN  "\e[43m"
+# define ANSI_COLOR_BBLUEN    "\e[44m"
+# define ANSI_COLOR_BMAGENTAN "\e[45m"
+# define ANSI_COLOR_BCYANN    "\e[46m"
+# define ANSI_COLOR_BWHITEN   "\e[46m"
+
+# define ANSI_COLOR_RESET    "\x1b[0m"
+
+# define EXITZERO(x) if (!(x)) { perror(g_nameapp); exit(EXIT_FAILURE); }
+# define EXITMINONE(x) if ((x) == -1) { perror(g_nameapp); exit(EXIT_FAILURE); }
+# define RETURNMINONE(x) if ((x) == -1) return (-1)
 # define IS_CURPREV(str) ((str[0] == '.') && (!str[1] || (str[1] == '.' && !str[2])))
 # define MAJOR(x) (int32_t)(((uint32_t)(x) >> 24) & 0xff)
 # define MINOR(x) (uint32_t)((x) & 0xffffff)
-# define AM_PARAMS 4
-# define PARAMS "rRal"
+# define AM_PARAMS 11
+# define PARAMS "RGraltufgd1"
 
 char			g_params[256];
 
@@ -58,14 +101,15 @@ t_max_length	g_max_length;
 t_buffer		g_buff;
 char			*g_nameapp;
 
-void	quicksort_name(t_stat_name **arr, int bot, int top);
-void	quicksort_argv(char **argv, int bot, int top);
+void	quicksort_name(t_stat_name **arr, int bot, int top, char reverse);
+void	quicksort_argv(char **argv, int bot, int top, char reverse);
+void	quicksort_time(t_stat_name **arr, int bot, int top, char reverse);
+void	quicksort_atime(t_stat_name **arr, int bot, int top, char reverse);
 char	*ls_strjoin_path(const char *s1, const char *s2);
 
 int		fill_params(int argc, char **argv);
 void	print_files(int argc, char **argv, int position);
-//void	print_regfiles(int argc, char **argv, int position, t_stat_name **files);
-//void	print_dir(const char *path, char isrecursion);
+void	print_dir(const char *path, char isrecursion);
 
 char	check_dir(const char *path);
 char	check_access(const char *path, char isrecursion);
@@ -75,10 +119,29 @@ void	fill_max_length(t_stat_name *file);
 
 size_t	count_files(const char *path);
 
-void	fill_stats(t_stat_name **files, const char *path, size_t *total);
+char	fill_stats(t_stat_name ***files, const char *path, size_t *total);
 void	sort_stats(t_stat_name **files, size_t amfiles);
-char	print_stats(t_stat_name **files, size_t amfiles);
-char	print_l_stats(t_stat_name **files, size_t amfiles);
+void	print_stats(t_stat_name **files, size_t amfiles);
+void	print_l_stats(t_stat_name **files, size_t amfiles);
 void	free_stats(t_stat_name **files, size_t amfiles);
+
+typedef struct	s_counter
+{
+	size_t	file;
+	size_t	dir;
+}				t_counter;
+
+typedef struct	s_tty_params
+{
+	size_t	rows;
+	size_t	columns;
+}				t_tty_params;
+
+typedef struct	s_iter
+{
+	size_t	i;
+	size_t	j;
+	size_t	k;
+}				t_iter;
 
 #endif

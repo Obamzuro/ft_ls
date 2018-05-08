@@ -1,0 +1,290 @@
+total 376
+-rw-r--r--   1 obamzuro  2018    174 May  7 19:47 1
+drw-rwxrwx  24 obamzuro  2018    816 May  4 16:38 123
+-rwxr--r--   1 obamzuro  2018      0 May  8 15:28 1t
+-rw-r--r--   1 obamzuro  2018  14351 May  8 15:28 2t
+-rw-r--r--   1 obamzuro  2018  61159 May  7 21:21 3
+drwxr-xr-x   3 obamzuro  2018    102 May  8 12:07 413
+drwxrwxrwx   3 obamzuro  2018    102 May  8 12:44 898
+-rw-r--r--   1 obamzuro  2018   1529 May  7 19:25 Makefile
+-rwxr-xr-x   1 obamzuro  2018  47784 May  8 15:25 d
+drwxr-xr-x   3 obamzuro  2018    102 May  7 21:25 d.dSYM
+drwxr-xr-x   2 obamzuro  2018     68 May  7 17:21 dir
+prw-r--r--   1 obamzuro  2018      0 May  8 12:49 fifo
+-rwxr-xr-x   1 obamzuro  2018  43488 May  8 15:25 ft_ls
+lrwxr-xr-x   1 obamzuro  2018      3 May  2 22:20 gadf -> 123
+drwxr-xr-x  11 obamzuro  2018    374 May  8 14:45 include
+drwxr-xr-x   8 obamzuro  2018    272 May  8 12:06 libft
+drwxr-xr-x   9 obamzuro  2018    306 May  8 12:06 libftprintf
+lrwxr-xr-x   1 obamzuro  2018      8 May  3 22:06 link -> Makefile
+-rwxrwxrwx   1 obamzuro  2018      1 May  4 21:31 qwertyuiqwertyui
+drwxr-xr-x   5 obamzuro  2018    170 May  4 18:04 s1
+drwxr-xr-x   6 obamzuro  2018    204 May  4 18:04 s2
+-rw-r--r--+  1 obamzuro  2018      0 May  4 13:05 sadf
+drwxr-xr-x  22 obamzuro  2018    748 May  8 15:25 src
+drwsr-Sr-t@  7 obamzuro  2018    238 May  1 19:12 what
+-rw-r--r--   1 obamzuro  2018      0 May  4 19:47 😹
+-rw-r--r--   1 obamzuro  2018      0 May  4 19:48 😹😹😹
+-rw-r--r--   1 obamzuro  2018      0 May  8 11:58 🤛🤛🤛🤛🤛
+
+./123:
+
+./413:
+total 0
+-rw-r--r--  1 obamzuro  2018  0 May  8 12:02 🤛🤛🤛🤛🤛
+
+./898:
+total 0
+-rw-r--r--  1 obamzuro  2018  0 May  8 12:44 1
+
+./d.dSYM:
+total 0
+drwxr-xr-x  4 obamzuro  2018  136 May  7 21:25 Contents
+
+./d.dSYM/Contents:
+total 8
+-rw-r--r--  1 obamzuro  2018  630 May  8 15:25 Info.plist
+drwxr-xr-x  3 obamzuro  2018  102 May  7 21:25 Resources
+
+./d.dSYM/Contents/Resources:
+total 0
+drwxr-xr-x  3 obamzuro  2018  102 May  7 21:25 DWARF
+
+./d.dSYM/Contents/Resources/DWARF:
+total 80
+-rw-r--r--  1 obamzuro  2018  37247 May  8 15:25 d
+
+./dir:
+
+./include:
+total 40
+-rw-r--r--  1 obamzuro  2018  3578 May  7 19:06 ft_printf.h
+-rw-r--r--  1 obamzuro  2018  4405 May  1 19:12 libft.h
+-rwxr-xr-x  1 obamzuro  2018  4609 May  8 14:45 ls.h
+
+./libft:
+total 144
+-rw-r--r--    1 obamzuro  2018   2589 May  1 19:12 Makefile
+-rw-r--r--    1 obamzuro  2018      9 May  1 19:12 author
+drwxr-xr-x    3 obamzuro  2018    102 May  1 19:12 include
+drwxr-xr-x  135 obamzuro  2018   4590 May  8 12:06 libft
+-rw-r--r--    1 obamzuro  2018  64000 May  8 12:06 libft.a
+
+./libft/include:
+total 16
+-rw-r--r--  1 obamzuro  2018  4405 May  1 19:12 libft.h
+
+./libft/libft:
+total 1064
+-rw-r--r--  1 obamzuro  2018  1484 May  1 19:12 ft_atoi.c
+-rw-r--r--  1 obamzuro  2018  1280 May  8 12:06 ft_atoi.o
+-rw-r--r--  1 obamzuro  2018   973 May  1 19:12 ft_bzero.c
+-rw-r--r--  1 obamzuro  2018   680 May  8 12:06 ft_bzero.o
+-rw-r--r--  1 obamzuro  2018  1021 May  1 19:12 ft_ccount.c
+-rw-r--r--  1 obamzuro  2018   716 May  8 12:06 ft_ccount.o
+-rw-r--r--  1 obamzuro  2018  1003 May  1 19:12 ft_fstrcpy.c
+-rw-r--r--  1 obamzuro  2018  1218 May  1 19:12 ft_is_prime.c
+-rw-r--r--  1 obamzuro  2018   888 May  8 12:06 ft_is_prime.o
+-rw-r--r--  1 obamzuro  2018   981 May  1 19:12 ft_isalnum.c
+-rw-r--r--  1 obamzuro  2018   736 May  8 12:06 ft_isalnum.o
+-rw-r--r--  1 obamzuro  2018  1002 May  1 19:12 ft_isalpha.c
+-rw-r--r--  1 obamzuro  2018   680 May  8 12:06 ft_isalpha.o
+-rw-r--r--  1 obamzuro  2018   970 May  1 19:12 ft_isascii.c
+-rw-r--r--  1 obamzuro  2018   648 May  8 12:06 ft_isascii.o
+-rw-r--r--  1 obamzuro  2018   949 May  1 19:12 ft_isdigit.c
+-rw-r--r--  1 obamzuro  2018   648 May  8 12:06 ft_isdigit.o
+-rw-r--r--  1 obamzuro  2018   952 May  1 19:12 ft_isprint.c
+-rw-r--r--  1 obamzuro  2018   648 May  8 12:06 ft_isprint.o
+-rw-r--r--  1 obamzuro  2018  1405 May  1 19:12 ft_itoa.c
+-rw-r--r--  1 obamzuro  2018  1140 May  8 12:06 ft_itoa.o
+-rw-r--r--  1 obamzuro  2018  1052 May  1 19:12 ft_list_last.c
+-rw-r--r--  1 obamzuro  2018   680 May  8 12:06 ft_list_last.o
+-rw-r--r--  1 obamzuro  2018  1055 May  1 19:12 ft_list_size.c
+-rw-r--r--  1 obamzuro  2018   664 May  8 12:06 ft_list_size.o
+-rw-r--r--  1 obamzuro  2018  1024 May  1 19:12 ft_lstadd.c
+-rw-r--r--  1 obamzuro  2018   668 May  8 12:06 ft_lstadd.o
+-rw-r--r--  1 obamzuro  2018  1103 May  1 19:12 ft_lstdel.c
+-rw-r--r--  1 obamzuro  2018   756 May  8 12:06 ft_lstdel.o
+-rw-r--r--  1 obamzuro  2018  1098 May  1 19:12 ft_lstdelone.c
+-rw-r--r--  1 obamzuro  2018   752 May  8 12:06 ft_lstdelone.o
+-rw-r--r--  1 obamzuro  2018  1046 May  1 19:12 ft_lstiter.c
+-rw-r--r--  1 obamzuro  2018   696 May  8 12:06 ft_lstiter.o
+-rw-r--r--  1 obamzuro  2018  1795 May  1 19:12 ft_lstmap.c
+-rw-r--r--  1 obamzuro  2018  1636 May  8 12:06 ft_lstmap.o
+-rw-r--r--  1 obamzuro  2018  1339 May  1 19:12 ft_lstnew.c
+-rw-r--r--  1 obamzuro  2018   928 May  8 12:06 ft_lstnew.o
+-rw-r--r--  1 obamzuro  2018  1061 May  1 19:12 ft_memalloc.c
+-rw-r--r--  1 obamzuro  2018   744 May  8 12:06 ft_memalloc.o
+-rw-r--r--  1 obamzuro  2018  1197 May  1 19:12 ft_memccpy.c
+-rw-r--r--  1 obamzuro  2018   760 May  8 12:06 ft_memccpy.o
+-rw-r--r--  1 obamzuro  2018  1117 May  1 19:12 ft_memchr.c
+-rw-r--r--  1 obamzuro  2018   724 May  8 12:06 ft_memchr.o
+-rw-r--r--  1 obamzuro  2018  1275 May  1 19:12 ft_memcmp.c
+-rw-r--r--  1 obamzuro  2018  1012 May  8 12:06 ft_memcmp.o
+-rw-r--r--  1 obamzuro  2018  1313 May  1 19:12 ft_memcpy.c
+-rw-r--r--  1 obamzuro  2018   948 May  8 12:06 ft_memcpy.o
+-rw-r--r--  1 obamzuro  2018   988 May  1 19:12 ft_memdel.c
+-rw-r--r--  1 obamzuro  2018   692 May  8 12:06 ft_memdel.o
+-rw-r--r--  1 obamzuro  2018  1247 May  1 19:12 ft_memmove.c
+-rw-r--r--  1 obamzuro  2018   776 May  8 12:06 ft_memmove.o
+-rw-r--r--  1 obamzuro  2018  1059 May  1 19:12 ft_memset.c
+-rw-r--r--  1 obamzuro  2018   684 May  8 12:06 ft_memset.o
+-rw-r--r--  1 obamzuro  2018  1480 May  1 19:12 ft_nbr_size.c
+-rw-r--r--  1 obamzuro  2018  1300 May  8 12:06 ft_nbr_size.o
+-rw-r--r--  1 obamzuro  2018   961 May  1 19:12 ft_putchar.c
+-rw-r--r--  1 obamzuro  2018   668 May  8 12:06 ft_putchar.o
+-rw-r--r--  1 obamzuro  2018  1961 May  1 19:12 ft_putchar_fd.c
+-rw-r--r--  1 obamzuro  2018  1956 May  8 12:06 ft_putchar_fd.o
+-rw-r--r--  1 obamzuro  2018   989 May  1 19:12 ft_putendl.c
+-rw-r--r--  1 obamzuro  2018   684 May  8 12:06 ft_putendl.o
+-rw-r--r--  1 obamzuro  2018  1026 May  1 19:12 ft_putendl_fd.c
+-rw-r--r--  1 obamzuro  2018   744 May  8 12:06 ft_putendl_fd.o
+-rw-r--r--  1 obamzuro  2018   959 May  1 19:12 ft_putnbr.c
+-rw-r--r--  1 obamzuro  2018   668 May  8 12:06 ft_putnbr.o
+-rw-r--r--  1 obamzuro  2018  1209 May  1 19:12 ft_putnbr_fd.c
+-rw-r--r--  1 obamzuro  2018   856 May  8 12:06 ft_putnbr_fd.o
+-rw-r--r--  1 obamzuro  2018   987 May  1 19:12 ft_putstr.c
+-rw-r--r--  1 obamzuro  2018   684 May  8 12:06 ft_putstr.o
+-rw-r--r--  1 obamzuro  2018  1006 May  1 19:12 ft_putstr_fd.c
+-rw-r--r--  1 obamzuro  2018   756 May  8 12:06 ft_putstr_fd.o
+-rw-r--r--  1 obamzuro  2018  1027 May  1 19:12 ft_strcat.c
+-rw-r--r--  1 obamzuro  2018   748 May  8 12:06 ft_strcat.o
+-rw-r--r--  1 obamzuro  2018  1029 May  1 19:12 ft_strchr.c
+-rw-r--r--  1 obamzuro  2018   692 May  8 12:06 ft_strchr.o
+-rw-r--r--  1 obamzuro  2018   984 May  1 19:12 ft_strclr.c
+-rw-r--r--  1 obamzuro  2018   668 May  8 12:06 ft_strclr.o
+-rw-r--r--  1 obamzuro  2018  1069 May  1 19:12 ft_strcmp.c
+-rw-r--r--  1 obamzuro  2018   748 May  8 12:06 ft_strcmp.o
+-rw-r--r--  1 obamzuro  2018  1031 May  1 19:12 ft_strcpy.c
+-rw-r--r--  1 obamzuro  2018   692 May  8 12:06 ft_strcpy.o
+-rw-r--r--  1 obamzuro  2018  1006 May  1 19:12 ft_strcpy_gnl.c
+-rw-r--r--  1 obamzuro  2018   688 May  8 12:06 ft_strcpy_gnl.o
+-rw-r--r--  1 obamzuro  2018   988 May  1 19:12 ft_strdel.c
+-rw-r--r--  1 obamzuro  2018   692 May  8 12:06 ft_strdel.o
+-rw-r--r--  1 obamzuro  2018  1072 May  1 19:12 ft_strdup.c
+-rw-r--r--  1 obamzuro  2018   844 May  8 12:06 ft_strdup.o
+-rw-r--r--  1 obamzuro  2018  1045 May  1 19:12 ft_strequ.c
+-rw-r--r--  1 obamzuro  2018   736 May  8 12:06 ft_strequ.o
+-rw-r--r--  1 obamzuro  2018   988 May  1 19:12 ft_striter.c
+-rw-r--r--  1 obamzuro  2018   696 May  8 12:06 ft_striter.o
+-rw-r--r--  1 obamzuro  2018  1039 May  1 19:12 ft_striteri.c
+-rw-r--r--  1 obamzuro  2018   712 May  8 12:06 ft_striteri.o
+-rw-r--r--  1 obamzuro  2018  1188 May  1 19:12 ft_strjoin.c
+-rw-r--r--  1 obamzuro  2018   920 May  8 12:06 ft_strjoin.o
+-rw-r--r--  1 obamzuro  2018  1224 May  1 19:12 ft_strlcat.c
+-rw-r--r--  1 obamzuro  2018   880 May  8 12:06 ft_strlcat.o
+-rw-r--r--  1 obamzuro  2018   999 May  1 19:12 ft_strlen.c
+-rw-r--r--  1 obamzuro  2018   652 May  8 12:06 ft_strlen.o
+-rw-r--r--  1 obamzuro  2018  1150 May  1 19:12 ft_strmap.c
+-rw-r--r--  1 obamzuro  2018   872 May  8 12:06 ft_strmap.o
+-rw-r--r--  1 obamzuro  2018  1176 May  1 19:12 ft_strmapi.c
+-rw-r--r--  1 obamzuro  2018   872 May  8 12:06 ft_strmapi.o
+-rw-r--r--  1 obamzuro  2018  1064 May  1 19:12 ft_strncat.c
+-rw-r--r--  1 obamzuro  2018   800 May  8 12:06 ft_strncat.o
+-rw-r--r--  1 obamzuro  2018  1133 May  1 19:12 ft_strncmp.c
+-rw-r--r--  1 obamzuro  2018   832 May  8 12:06 ft_strncmp.o
+-rw-r--r--  1 obamzuro  2018  1080 May  1 19:12 ft_strncpy.c
+-rw-r--r--  1 obamzuro  2018   736 May  8 12:06 ft_strncpy.o
+-rw-r--r--  1 obamzuro  2018  1060 May  1 19:12 ft_strnequ.c
+-rw-r--r--  1 obamzuro  2018   748 May  8 12:06 ft_strnequ.o
+-rw-r--r--  1 obamzuro  2018  1053 May  1 19:12 ft_strnew.c
+-rw-r--r--  1 obamzuro  2018   756 May  8 12:06 ft_strnew.o
+-rw-r--r--  1 obamzuro  2018  1542 May  1 19:12 ft_strnstr.c
+-rw-r--r--  1 obamzuro  2018  1372 May  8 12:06 ft_strnstr.o
+-rw-r--r--  1 obamzuro  2018  1081 May  1 19:12 ft_strrchr.c
+-rw-r--r--  1 obamzuro  2018   768 May  8 12:06 ft_strrchr.o
+-rw-r--r--  1 obamzuro  2018  1452 May  1 19:12 ft_strsplit.c
+-rw-r--r--  1 obamzuro  2018  1360 May  8 12:06 ft_strsplit.o
+-rw-r--r--  1 obamzuro  2018  1164 May  1 19:12 ft_strstr.c
+-rw-r--r--  1 obamzuro  2018   820 May  8 12:06 ft_strstr.o
+-rw-r--r--  1 obamzuro  2018  1144 May  1 19:12 ft_strsub.c
+-rw-r--r--  1 obamzuro  2018   800 May  8 12:06 ft_strsub.o
+-rw-r--r--  1 obamzuro  2018  1332 May  1 19:12 ft_strtrim.c
+-rw-r--r--  1 obamzuro  2018  1172 May  8 12:06 ft_strtrim.o
+-rw-r--r--  1 obamzuro  2018   996 May  1 19:12 ft_tolower.c
+-rw-r--r--  1 obamzuro  2018   656 May  8 12:06 ft_tolower.o
+-rw-r--r--  1 obamzuro  2018   997 May  1 19:12 ft_toupper.c
+-rw-r--r--  1 obamzuro  2018   656 May  8 12:06 ft_toupper.o
+-rw-r--r--  1 obamzuro  2018  1121 May  1 19:12 ft_wcount.c
+-rw-r--r--  1 obamzuro  2018   836 May  8 12:06 ft_wcount.o
+-rw-r--r--  1 obamzuro  2018  3147 May  1 19:12 get_next_line.c
+-rw-r--r--  1 obamzuro  2018  3184 May  8 12:06 get_next_line.o
+
+./libftprintf:
+total 88
+-rw-r--r--   1 obamzuro  2018   1675 May  1 19:29 Makefile
+-rw-r--r--   1 obamzuro  2018      9 May  1 19:29 author
+drwxr-xr-x   3 obamzuro  2018    102 May  7 13:43 include
+-rw-r--r--   1 obamzuro  2018  33680 May  8 12:06 libftprintf.a
+drwxr-xr-x  37 obamzuro  2018   1258 May  8 12:06 source
+
+./libftprintf/include:
+total 8
+-rw-r--r--  1 obamzuro  2018  3591 May  1 19:29 ft_printf.h
+
+./libftprintf/source:
+total 280
+-rw-r--r--  1 obamzuro  2018  1943 May  1 19:29 ft_char.c
+-rw-r--r--  1 obamzuro  2018  1628 May  8 12:06 ft_char.o
+-rw-r--r--  1 obamzuro  2018  2651 May  1 19:29 ft_decimal.c
+-rw-r--r--  1 obamzuro  2018  2520 May  8 12:06 ft_decimal.o
+-rw-r--r--  1 obamzuro  2018  3005 May  1 19:29 ft_fillglob.c
+-rw-r--r--  1 obamzuro  2018  2132 May  8 12:06 ft_fillglob.o
+-rw-r--r--  1 obamzuro  2018  1873 May  1 19:29 ft_getvarg.c
+-rw-r--r--  1 obamzuro  2018  2112 May  8 12:06 ft_getvarg.o
+-rw-r--r--  1 obamzuro  2018  2212 May  1 19:29 ft_pointer.c
+-rw-r--r--  1 obamzuro  2018  2396 May  1 19:33 ft_printf.c
+-rw-r--r--  1 obamzuro  2018  3348 May  8 12:06 ft_printf.o
+-rw-r--r--  1 obamzuro  2018  2066 May  1 19:49 ft_printf_plus.c
+-rw-r--r--  1 obamzuro  2018  2192 May  8 12:06 ft_printf_plus.o
+-rw-r--r--  1 obamzuro  2018  2425 May  1 19:29 ft_string.c
+-rw-r--r--  1 obamzuro  2018  2332 May  8 12:06 ft_string.o
+-rw-r--r--  1 obamzuro  2018  1957 May  1 19:29 ft_unsigned.c
+-rw-r--r--  1 obamzuro  2018  1808 May  8 12:06 ft_unsigned.o
+-rw-r--r--  1 obamzuro  2018  2586 May  1 19:29 ft_unsigned_hex.c
+-rw-r--r--  1 obamzuro  2018  2372 May  8 12:06 ft_unsigned_hex.o
+-rw-r--r--  1 obamzuro  2018  2550 May  1 19:29 ft_unsigned_octal.c
+-rw-r--r--  1 obamzuro  2018  2192 May  8 12:06 ft_unsigned_octal.o
+-rw-r--r--  1 obamzuro  2018  1367 May  1 19:29 pf_nbr_size.c
+-rw-r--r--  1 obamzuro  2018  1184 May  8 12:06 pf_nbr_size.o
+-rw-r--r--  1 obamzuro  2018  1885 May  1 19:29 pf_putchar.c
+-rw-r--r--  1 obamzuro  2018  1880 May  8 12:06 pf_putchar.o
+-rw-r--r--  1 obamzuro  2018  1654 May  1 19:29 pf_putnbr.c
+-rw-r--r--  1 obamzuro  2018  1580 May  8 12:06 pf_putnbr.o
+-rw-r--r--  1 obamzuro  2018  1379 May  1 19:29 pf_putstr.c
+-rw-r--r--  1 obamzuro  2018  1360 May  8 12:06 pf_putstr.o
+-rw-r--r--  1 obamzuro  2018  1103 May  1 19:29 pf_strlen.c
+-rw-r--r--  1 obamzuro  2018   932 May  8 12:06 pf_strlen.o
+-rw-r--r--  1 obamzuro  2018  1086 May  1 19:29 pf_strstr.c
+-rw-r--r--  1 obamzuro  2018   856 May  8 12:06 pf_strstr.o
+-rw-r--r--  1 obamzuro  2018  1181 May  1 19:43 pf_write.c
+-rw-r--r--  1 obamzuro  2018  1072 May  8 12:06 pf_write.o
+
+./s1:
+total 0
+-rw-r--r--  1 obamzuro  2018  0 May  4 18:04 1
+-rw-r--r--  1 obamzuro  2018  0 May  4 18:04 2
+-rw-r--r--  1 obamzuro  2018  0 May  4 18:04 3
+
+./s2:
+total 8
+-rw-r--r--  1 obamzuro  2018  0 May  4 18:04 a
+-rw-r--r--  1 obamzuro  2018  0 May  4 18:04 b
+-rw-r--r--  1 obamzuro  2018  0 May  4 18:04 c
+lrwxr-xr-x  1 obamzuro  2018  2 May  4 18:04 s1 -> s1
+
+./src:
+total 80
+-rwxr-xr-x  1 obamzuro  2018   5174 May  8 14:45 ls_sort.c
+-rw-r--r--  1 obamzuro  2018   1321 May  1 19:12 ls_strjoin.c
+-rwxr-xr-x  1 obamzuro  2018  13067 May  8 15:24 main.c
+-rw-r--r--  1 obamzuro  2018   1634 May  7 21:11 parser.c
+-rw-r--r--  1 obamzuro  2018   5023 May  8 15:25 printing.c
+
+./what:
+total 8
+-rw-r--r--@ 1 obamzuro  2018  0 May  1 19:12 1
+-rwSr-Sr--+ 1 obamzuro  2018  6 May  1 19:12 2
+-rw-r--r--  1 obamzuro  2018  0 May  1 19:12 3
+-rw-r--r--@ 1 obamzuro  2018  0 May  1 19:12 4
+-rw-r--r--@ 1 obamzuro  2018  0 May  1 19:12 5
