@@ -6,13 +6,13 @@
 /*   By: obamzuro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 18:03:11 by obamzuro          #+#    #+#             */
-/*   Updated: 2018/05/09 18:04:14 by obamzuro         ###   ########.fr       */
+/*   Updated: 2018/05/09 18:43:56 by obamzuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-static void		handle_width_tty(t_stat_name **files, size_t amfiles,
+static void		handle_width_tty(size_t amfiles,
 		size_t *columns, size_t *rows)
 {
 	struct winsize	ws;
@@ -92,7 +92,7 @@ void			print_stats(t_stat_name **files, size_t amfiles)
 	iter.j = 0;
 	if (g_params['1'])
 		print_one_stats(files, amfiles, &iter);
-	handle_width_tty(files, amfiles, &ttyparams.columns, &ttyparams.rows);
+	handle_width_tty(amfiles, &ttyparams.columns, &ttyparams.rows);
 	while (iter.j < ttyparams.rows)
 	{
 		first = 0;

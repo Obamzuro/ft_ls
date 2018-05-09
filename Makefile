@@ -6,7 +6,7 @@
 #    By: obamzuro <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/18 00:20:32 by obamzuro          #+#    #+#              #
-#    Updated: 2018/05/09 18:32:56 by obamzuro         ###   ########.fr        #
+#    Updated: 2018/05/09 18:41:26 by obamzuro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,20 +43,20 @@ FLAGS = -Wall -Wextra -Werror
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	make -C libft/
+	make -C libf/
 	make -C libftprintf/
-	gcc $(OBJ) -I include -L libft -lft -L libftprintf -lftprintf -o $(NAME)
+	gcc $(FLAGS) $(OBJ) -I include -L libf -lft -L libftprintf -lftprintf -o $(NAME)
 
 %.o: %.c
-	gcc -g -I include -c $< -o $@
+	gcc $(FLAGS) -I include -c $< -o $@
 
 clean:
-	make -C libft/ clean
+	make -C libf/ clean
 	make -C libftprintf/ clean
 	find . -name ".*.sw[klmpon]" -o -name "*.o" -exec rm -rf {} \;
 
 fclean: clean
-	make -C libft/ fclean
+	make -C libf/ fclean
 	make -C libftprintf/ fclean
 	rm -rf $(NAME)
 

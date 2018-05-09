@@ -6,7 +6,7 @@
 /*   By: obamzuro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 18:40:12 by obamzuro          #+#    #+#             */
-/*   Updated: 2018/05/09 18:02:19 by obamzuro         ###   ########.fr       */
+/*   Updated: 2018/05/09 18:42:12 by obamzuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int			fill_params(int argc, char **argv)
 		while (*temp)
 		{
 			check_params(*temp);
-			g_params[*temp++] = 1;
+			g_params[(int)*temp++] = 1;
 		}
 		++i;
 	}

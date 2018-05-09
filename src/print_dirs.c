@@ -6,7 +6,7 @@
 /*   By: obamzuro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 17:34:05 by obamzuro          #+#    #+#             */
-/*   Updated: 2018/05/09 18:03:02 by obamzuro         ###   ########.fr       */
+/*   Updated: 2018/05/09 18:43:34 by obamzuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static size_t	count_files(const char *path)
 
 static void		print_dir_rec(t_stat_name **files, size_t amfiles)
 {
-	int i;
+	size_t i;
 
 	if (g_params['R'])
 	{

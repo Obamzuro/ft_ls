@@ -6,7 +6,7 @@
 /*   By: obamzuro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 16:34:10 by obamzuro          #+#    #+#             */
-/*   Updated: 2018/05/09 17:25:54 by obamzuro         ###   ########.fr       */
+/*   Updated: 2018/05/09 18:45:03 by obamzuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static int	partition_time_normal(t_stat_name **arr, int bot, int top)
 {
 	time_t		mid;
 	char		*midname;
-	t_stat_name	*temp;
 
 	mid = arr[(bot + top) / 2]->stat.st_mtimespec.tv_sec;
 	midname = ft_strdup(arr[(bot + top) / 2]->name);
@@ -45,7 +44,6 @@ static int	partition_time_reverse(t_stat_name **arr, int bot, int top)
 {
 	time_t		mid;
 	char		*midname;
-	t_stat_name	*temp;
 
 	mid = arr[(bot + top) / 2]->stat.st_mtimespec.tv_sec;
 	midname = ft_strdup(arr[(bot + top) / 2]->name);

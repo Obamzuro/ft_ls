@@ -6,7 +6,7 @@
 /*   By: obamzuro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 18:03:21 by obamzuro          #+#    #+#             */
-/*   Updated: 2018/05/09 18:03:26 by obamzuro         ###   ########.fr       */
+/*   Updated: 2018/05/09 18:44:28 by obamzuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	print_link(t_stat_name *file)
 {
 	char	*pathfile;
-	size_t	lim;
+	ssize_t	lim;
 	ssize_t	ret;
 
 	if (!S_ISLNK(file->stat.st_mode))

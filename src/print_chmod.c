@@ -6,7 +6,7 @@
 /*   By: obamzuro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 18:02:23 by obamzuro          #+#    #+#             */
-/*   Updated: 2018/05/09 18:04:03 by obamzuro         ###   ########.fr       */
+/*   Updated: 2018/05/09 18:43:08 by obamzuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static void		print_acl(t_stat_name *file)
 {
 	acl_t		acl;
-	acl_entry_t	entry;
 
 	if ((listxattr(file->pathname, 0, 0, XATTR_NOFOLLOW)) > 0)
 		g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, "@");
@@ -28,8 +27,7 @@ static void		print_acl(t_stat_name *file)
 		g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, " ");
 }
 
-static void		print_chmod_exec_sticky(t_stat_name *file,
-		size_t bit, mode_t mode)
+static void		print_chmod_exec_sticky(size_t bit, mode_t mode)
 {
 	if (mode & bit)
 		if (mode & 0x200)
@@ -60,14 +58,13 @@ static void		print_chmod_exec(t_stat_name *file, int order, size_t bit)
 			g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, "-");
 	}
 	else
-		print_chmod_exec_sticky(file, bit, mode);
+		print_chmod_exec_sticky(bit, mode);
 }
 
 static void		print_chmod_access(t_stat_name *file)
 {
 	mode_t	mode;
 	int		i;
-	size_t	j;
 	size_t	temp;
 
 	mode = file->stat.st_mode;
