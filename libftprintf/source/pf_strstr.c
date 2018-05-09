@@ -14,7 +14,7 @@
 
 char		pf_strstr(const char *big, const char *little)
 {
-	while (*big && *little && *big == *little)
+	while (*big == *little && *big && *little)
 	{
 		++big;
 		++little;

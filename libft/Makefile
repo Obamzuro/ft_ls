@@ -6,13 +6,13 @@
 #    By: obamzuro <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/20 11:09:03 by obamzuro          #+#    #+#              #
-#    Updated: 2018/05/01 19:05:44 by obamzuro         ###   ########.fr        #
+#    Updated: 2018/05/09 16:42:40 by obamzuro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
-SRCNAME = 	ft_memset.c				\
+SRCNAME =   ft_memset.c				\
 			ft_bzero.c				\
 			ft_memcpy.c				\
 			ft_memccpy.c				\
@@ -78,8 +78,9 @@ SRCNAME = 	ft_memset.c				\
 			ft_strcpy_gnl.c			\
 			get_next_line.c			\
 			ft_nbr_size.c				\
+			ft_swap.c				\
 
-SRC    = $(addprefix libft/, $(SRCNAME))
+SRC    = $(addprefix src/, $(SRCNAME))
 OBJECT = $(SRC:.c=.o)
 
 HDIR   = include

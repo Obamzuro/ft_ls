@@ -6,7 +6,7 @@
 /*   By: obamzuro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 13:23:41 by obamzuro          #+#    #+#             */
-/*   Updated: 2018/05/01 18:36:28 by obamzuro         ###   ########.fr       */
+/*   Updated: 2018/05/09 11:30:24 by obamzuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static char	count_bytes(int a)
 	return (4);
 }
 
-void		pf_putstr(const char *s, size_t size)
+void		pf_putstr(const char *s, size_t size, t_buffer *buff)
 {
 	size_t i;
 
@@ -32,13 +32,13 @@ void		pf_putstr(const char *s, size_t size)
 	i = 0;
 	while (*s && i < size)
 	{
-		pf_write(*s);
+		pf_write(*s, buff);
 		++s;
 		++i;
 	}
 }
 
-size_t		pf_wputstr(const wchar_t *s)
+size_t		pf_wputstr(const wchar_t *s, t_buffer *buff)
 {
 	size_t res;
 
@@ -47,7 +47,7 @@ size_t		pf_wputstr(const wchar_t *s)
 	res = 0;
 	while (*s)
 	{
-		pf_putchar(*s);
+		pf_putchar(*s, buff);
 		res += count_bytes(*s);
 		++s;
 	}

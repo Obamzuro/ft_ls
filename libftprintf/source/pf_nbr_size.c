@@ -6,18 +6,19 @@
 /*   By: obamzuro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 13:26:34 by obamzuro          #+#    #+#             */
-/*   Updated: 2018/05/01 13:26:34 by obamzuro         ###   ########.fr       */
+/*   Updated: 2018/05/09 11:47:48 by obamzuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-size_t	pf_nbr_size(intmax_t n, char base, char alternative)
+unsigned char	pf_nbr_size(intmax_t n, char base, char alternative)
 {
 	size_t i;
 
 	i = 1;
-	while (n / base)
+	n /= base;
+	while (n)
 	{
 		++i;
 		n /= base;
@@ -32,12 +33,13 @@ size_t	pf_nbr_size(intmax_t n, char base, char alternative)
 	return (i);
 }
 
-size_t	pf_unbr_size(uintmax_t n, char base, char alternative)
+unsigned char	pf_unbr_size(uintmax_t n, char base, char alternative)
 {
 	size_t i;
 
 	i = 1;
-	while (n / base)
+	n /= base;
+	while (n)
 	{
 		++i;
 		n /= base;

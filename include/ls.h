@@ -6,12 +6,12 @@
 /*   By: obamzuro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 20:45:32 by obamzuro          #+#    #+#             */
-/*   Updated: 2018/05/08 16:17:02 by obamzuro         ###   ########.fr       */
+/*   Updated: 2018/05/09 18:30:17 by obamzuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LS_H
-#define LS_H
+# define LS_H
 # include <stdio.h>
 # include <dirent.h>
 # include <sys/stat.h>
@@ -27,6 +27,7 @@
 # include <sys/acl.h>
 # include <sys/xattr.h>
 # include <sys/ioctl.h>
+# include <errno.h>
 # include "libft.h"
 # include "ft_printf.h"
 # define ANSI_COLOR_BLACK    "\x1b[30m"
@@ -71,7 +72,8 @@
 # define EXITZERO(x) if (!(x)) { perror(g_nameapp); exit(EXIT_FAILURE); }
 # define EXITMINONE(x) if ((x) == -1) { perror(g_nameapp); exit(EXIT_FAILURE); }
 # define RETURNMINONE(x) if ((x) == -1) return (-1)
-# define IS_CURPREV(str) ((str[0] == '.') && (!str[1] || (str[1] == '.' && !str[2])))
+# define RETURNMINONEVOID(x) if ((x) == -1) return
+# define CUR(str) ((str[0] == '.') && (!str[1] || (str[1] == '.' && !str[2])))
 # define MAJOR(x) (int32_t)(((uint32_t)(x) >> 24) & 0xff)
 # define MINOR(x) (uint32_t)((x) & 0xffffff)
 # define AM_PARAMS 11
@@ -96,34 +98,41 @@ typedef struct	s_max_length
 	int		name;
 }				t_max_length;
 
-extern int		errno;
 t_max_length	g_max_length;
 t_buffer		g_buff;
 char			*g_nameapp;
 
-void	quicksort_name(t_stat_name **arr, int bot, int top, char reverse);
-void	quicksort_argv(char **argv, int bot, int top, char reverse);
-void	quicksort_time(t_stat_name **arr, int bot, int top, char reverse);
-void	quicksort_atime(t_stat_name **arr, int bot, int top, char reverse);
-char	*ls_strjoin_path(const char *s1, const char *s2);
+void			reset_max_length(void);
+void			fill_max_length(t_stat_name *file);
 
-int		fill_params(int argc, char **argv);
-void	print_files(int argc, char **argv, int position);
-void	print_dir(const char *path, char isrecursion);
+int				fill_params(int argc, char **argv);
 
-char	check_dir(const char *path);
-char	check_access(const char *path, char isrecursion);
+void			print_files(int argc, char **argv, int position);
+void			print_dir(const char *path, char isrecursion);
+void			print_regfiles(t_stat_name **files[2], int argc,
+		char **argv, int position);
 
-void	reset_max_length(void);
-void	fill_max_length(t_stat_name *file);
+void			print_chmod(t_stat_name *file);
+void			print_color_name(t_stat_name *file);
+void			print_date_name(t_stat_name *file);
 
-size_t	count_files(const char *path);
+char			fill_stats(t_stat_name ***files, const char *path,
+		size_t *total);
+void			sort_stats(t_stat_name **files, size_t amfiles);
+void			print_stats(t_stat_name **files, size_t amfiles);
+void			print_l_stats(t_stat_name **files, size_t amfiles);
+void			free_stats(t_stat_name **files, size_t amfiles);
 
-char	fill_stats(t_stat_name ***files, const char *path, size_t *total);
-void	sort_stats(t_stat_name **files, size_t amfiles);
-void	print_stats(t_stat_name **files, size_t amfiles);
-void	print_l_stats(t_stat_name **files, size_t amfiles);
-void	free_stats(t_stat_name **files, size_t amfiles);
+char			*ls_strjoin_path(const char *s1, const char *s2);
+size_t			ls_strlen_printing(char *name);
+void			quicksort_name(t_stat_name **arr, int bot,
+		int top, char reverse);
+void			quicksort_argv(char **argv, int bot,
+		int top, char reverse);
+void			quicksort_time(t_stat_name **arr, int bot,
+		int top, char reverse);
+void			quicksort_atime(t_stat_name **arr, int bot,
+		int top, char reverse);
 
 typedef struct	s_counter
 {

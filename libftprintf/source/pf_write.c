@@ -6,25 +6,25 @@
 /*   By: obamzuro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 13:21:22 by obamzuro          #+#    #+#             */
-/*   Updated: 2018/05/08 16:36:20 by obamzuro         ###   ########.fr       */
+/*   Updated: 2018/05/09 12:14:24 by obamzuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void		pf_write(char src)
+void		pf_write(char src, t_buffer *buff)
 {
-	if (g_buff.cur >= PRINTF_BUFF_SIZE)
+	if (buff->cur >= PRINTF_BUFF_SIZE)
 	{
-		write(1, g_buff.line, PRINTF_BUFF_SIZE);
-		g_buff.cur = 0;
-		++g_buff.ret;
+		write(buff->fd, buff->line, PRINTF_BUFF_SIZE);
+		buff->cur = 0;
+		++(buff->ret);
 	}
-	g_buff.line[g_buff.cur] = src;
-	++(g_buff.cur);
+	buff->line[buff->cur] = src;
+	++(buff->cur);
 }
 
-void		pf_write_tail(void)
+void		pf_write_tail(t_buffer *buff)
 {
-	write(1, g_buff.line, g_buff.cur);
+	write(buff->fd, buff->line, buff->cur);
 }

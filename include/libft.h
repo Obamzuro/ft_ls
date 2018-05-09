@@ -6,7 +6,7 @@
 /*   By: obamzuro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 11:38:42 by obamzuro          #+#    #+#             */
-/*   Updated: 2018/05/01 13:35:16 by obamzuro         ###   ########.fr       */
+/*   Updated: 2018/05/09 17:10:01 by obamzuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,4 +105,6 @@ int				get_next_line(const int fd, char **line);
 size_t			ft_nbr_size(intmax_t n);
 size_t			ft_nbr_basesize(intmax_t n, char base, char alternative);
 size_t			ft_unbr_basesize(uintmax_t n, char base, char alternative);
+
+void			swap_pointers(void **ptr1, void **ptr2);
 #endif

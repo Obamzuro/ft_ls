@@ -6,7 +6,7 @@
 #    By: obamzuro <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/20 11:09:03 by obamzuro          #+#    #+#              #
-#    Updated: 2018/05/01 19:26:25 by obamzuro         ###   ########.fr        #
+#    Updated: 2018/05/09 15:47:33 by obamzuro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,8 @@ SRC = pf_strstr.c				\
 	  ft_string.c				\
 	  ft_getvarg.c				\
 	  ft_fillglob.c				\
-	  ft_printf_plus.c			\
+	  pf_handling_special.c		\
+	  pf_handling_special_plus.c\
 
 SRCDIRS = $(addprefix source/, $(SRC))
 
@@ -45,15 +46,18 @@ $(NAME): $(OBJECT)
 %.o:%.c
 	gcc -Wall -Wextra -Werror -o $@ -c $< -I $(HDIR)
 
-mai:
+mai: main.c $(NAME)
 	gcc main.c -I $(HDIR) -L . -lftprintf
+
+pf: speedtest_printf.c $(NAME)
+	gcc -pg speedtest_printf.c -I $(HDIR) -L . -lftprintf -o pf
 
 clean:
 	rm -f $(OBJECT)
-	find . -name ".*.sw[pon]" -exec rm -f {} \;
+	find . -name ".*.sw[pon]" -o -name "*.o" -exec rm -f {} \;
 
 fclean: clean
-	rm -f $(NAME)
+	rm -rf $(NAME)
 
 re: fclean all
 
