@@ -6,7 +6,7 @@
 #    By: obamzuro <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/18 00:20:32 by obamzuro          #+#    #+#              #
-#    Updated: 2018/05/09 18:41:26 by obamzuro         ###   ########.fr        #
+#    Updated: 2018/05/16 12:41:08 by obamzuro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ SRCNAME = 	main.c					\
 			ls_strjoin.c			\
 			ls_strlen_printing.c	\
 
-
+HDR = include/ls.h
 
 SRC = $(addprefix src/, $(SRCNAME))
 
@@ -47,7 +47,7 @@ $(NAME): $(OBJ)
 	make -C libftprintf/
 	gcc $(FLAGS) $(OBJ) -I include -L libf -lft -L libftprintf -lftprintf -o $(NAME)
 
-%.o: %.c
+%.o: %.c $(HDR)
 	gcc $(FLAGS) -I include -c $< -o $@
 
 clean:
