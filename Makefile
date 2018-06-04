@@ -38,14 +38,14 @@ SRC = $(addprefix src/, $(SRCNAME))
 
 OBJ = $(SRC:.c=.o)
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -g
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	make -C libf/
 	make -C libftprintf/
-	gcc $(FLAGS) $(OBJ) -I include -L libf -lft -L libftprintf -lftprintf -o $(NAME)
+	gcc $(FLAGS) $(OBJ) -I include -L libf -lft -L libftprintf -lftprintf -lm -o $(NAME)
 
 %.o: %.c $(HDR)
 	gcc $(FLAGS) -I include -c $< -o $@

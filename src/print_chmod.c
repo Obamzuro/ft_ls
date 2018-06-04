@@ -14,17 +14,17 @@
 
 static void		print_acl(t_stat_name *file)
 {
-	acl_t		acl;
-
-	if ((listxattr(file->pathname, 0, 0, XATTR_NOFOLLOW)) > 0)
-		g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, "@");
-	else if ((acl = acl_get_link_np(file->pathname, ACL_TYPE_EXTENDED)))
-	{
-		g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, "+");
-		free(acl);
-	}
-	else
-		g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, " ");
+//	acl_t		acl;
+//
+//	if ((listxattr(file->pathname, 0, 0, XATTR_NOFOLLOW)) > 0)
+//		g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, "@");
+//	else if ((acl = acl_get_link_np(file->pathname, ACL_TYPE_EXTENDED)))
+//	{
+//		g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, "+");
+//		free(acl);
+//	}
+//	else
+//		g_buff.cur = ft_snprintf(g_buff.line, g_buff.cur, " ");
 }
 
 static void		print_chmod_exec_sticky(size_t bit, mode_t mode)

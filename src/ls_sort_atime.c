@@ -17,16 +17,16 @@ static int	partition_atime_normal(t_stat_name **arr, int bot, int top)
 	time_t		mid;
 	char		*midname;
 
-	mid = arr[(bot + top) / 2]->stat.st_atimespec.tv_sec;
+	mid = arr[(bot + top) / 2]->stat.st_atim.tv_sec;
 	midname = ft_strdup(arr[(bot + top) / 2]->name);
 	while (bot <= top)
 	{
-		while ((arr[bot]->stat.st_atimespec.tv_sec > mid) ||
-				(arr[bot]->stat.st_atimespec.tv_sec == mid
+		while ((arr[bot]->stat.st_atim.tv_sec > mid) ||
+				(arr[bot]->stat.st_atim.tv_sec == mid
 				&& ft_strcmp(arr[bot]->name, midname) < 0))
 			++bot;
-		while ((arr[top]->stat.st_atimespec.tv_sec < mid) ||
-				(arr[top]->stat.st_atimespec.tv_sec == mid
+		while ((arr[top]->stat.st_atim.tv_sec < mid) ||
+				(arr[top]->stat.st_atim.tv_sec == mid
 				&& ft_strcmp(arr[top]->name, midname) > 0))
 			--top;
 		if (bot <= top)
@@ -45,16 +45,16 @@ static int	partition_atime_reverse(t_stat_name **arr, int bot, int top)
 	time_t		mid;
 	char		*midname;
 
-	mid = arr[(bot + top) / 2]->stat.st_atimespec.tv_sec;
+	mid = arr[(bot + top) / 2]->stat.st_atim.tv_sec;
 	midname = ft_strdup(arr[(bot + top) / 2]->name);
 	while (bot <= top)
 	{
-		while ((arr[bot]->stat.st_atimespec.tv_sec < mid) ||
-					(arr[bot]->stat.st_atimespec.tv_sec == mid
+		while ((arr[bot]->stat.st_atim.tv_sec < mid) ||
+					(arr[bot]->stat.st_atim.tv_sec == mid
 					&& ft_strcmp(arr[bot]->name, midname) > 0))
 			++bot;
-		while ((arr[top]->stat.st_atimespec.tv_sec > mid) ||
-					(arr[top]->stat.st_atimespec.tv_sec == mid
+		while ((arr[top]->stat.st_atim.tv_sec > mid) ||
+					(arr[top]->stat.st_atim.tv_sec == mid
 					&& ft_strcmp(arr[top]->name, midname) < 0))
 			--top;
 		if (bot <= top)

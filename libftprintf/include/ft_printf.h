@@ -6,7 +6,7 @@
 /*   By: obamzuro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 12:38:51 by obamzuro          #+#    #+#             */
-/*   Updated: 2018/05/09 15:28:29 by obamzuro         ###   ########.fr       */
+/*   Updated: 2018/05/21 15:13:58 by obamzuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define FT_PRINTF_H
 # define PRINTF_BUFF_SIZE 4096
 # define AM_FLAGS 5
-# define AM_SIZES 6
+# define AM_SIZES 7
 # define AM_CONVS 15
 # include <stdarg.h>
 # include <unistd.h>

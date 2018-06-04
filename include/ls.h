@@ -30,6 +30,7 @@
 # include <errno.h>
 # include "libft.h"
 # include "ft_printf.h"
+# include <inttypes.h>
 # define ANSI_COLOR_BLACK    "\x1b[30m"
 # define ANSI_COLOR_RED      "\x1b[31m"
 # define ANSI_COLOR_GREEN    "\x1b[32m"

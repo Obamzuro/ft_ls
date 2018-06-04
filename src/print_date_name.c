@@ -26,8 +26,8 @@ void			print_date_name(t_stat_name *file)
 	char	*timefilestr;
 	time_t	diffmodify;
 
-	timefile = g_params['u'] ? file->stat.st_atimespec.tv_sec
-		: file->stat.st_mtimespec.tv_sec;
+	timefile = g_params['u'] ? file->stat.st_atim.tv_sec
+		: file->stat.st_mtim.tv_sec;
 	timefilestr = ctime(&timefile);
 	diffmodify = time(0);
 	diffmodify = diffmodify > timefile ?
